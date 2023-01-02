@@ -194,9 +194,10 @@ function isInsideCircle(/* circle, point */) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(str) {
-  const arr = str.split('');
-  return arr.filter((el, i, array) => array.indexOf(el) === array.lastIndexOf(el))[0] || null;
+function findFirstSingleChar(/* str */) {
+  throw new Error('Not implemented');
+  // const arr = str.split('');
+  // return arr.filter((el, array) => array.indexOf(el) === array.lastIndexOf(el))[0] || null;
 }
 
 
@@ -407,13 +408,13 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-  const firstElem = pathes.splice(0, 1);
-  const firstArray = firstElem.join('/').split('/');
-  const result = firstArray.filter((item) => pathes.every((elem) => elem.includes(item)));
-  return `${result.join('')}`;
+  const arr = pathes.map((item) => item.split('/'));
+  let result = '';
+  arr[0].forEach((item, i) => {
+    result += (arr.every((elem) => item === elem[i])) ? `${item}/` : '';
+  });
+  return result;
 }
-
-
 /**
  * Returns the product of two specified matrixes.
  * See details: https://en.wikipedia.org/wiki/Matrix_multiplication
