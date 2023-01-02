@@ -203,8 +203,12 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  const goriaontal = '─';
+  const vertical = `│${' '.repeat(width - 2)}│\n`;
+  const top = `┌${goriaontal.repeat(width - 2)}┐\n`;
+  const bottom = `└${goriaontal.repeat(width - 2)}┘\n`;
+  return top + vertical.repeat(height - 2) + bottom;
 }
 
 
@@ -224,9 +228,36 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+  const rot = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'.split('');
+  // const finalResult = [];
+  const result = [];
+
+  // for (let i = 0; i < str.length; i += 1) {
+  //   if (str[i] === ' ') {
+  //     result += ' ';
+  //   } else {
+  //     const letterForReplace = (rot[alphabet.indexOf(str[i])])
+  //       ? rot[alphabet.indexOf(str[i])] : str[i];
+  //     result = result.replace(str[i], letterForReplace);
+  //   }
+
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === ' ') {
+      result.push(' ');
+    } else {
+      const index = alphabet.indexOf(str[i]);
+      if (index === -1) {
+        result.push(str[i]);
+      } else {
+        result.push(rot[index]);
+      }
+    }
+  }
+  return result.join('');
 }
+
 
 /**
  * Returns true if the value is string; otherwise false.
@@ -241,8 +272,12 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  const newValue = value;
+  if (typeof newValue === 'string' || newValue instanceof String) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -270,10 +305,13 @@ function isString(/* value */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const arr = ['A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'];
+  return arr.indexOf(value);
 }
-
 
 module.exports = {
   concatenateStrings,
