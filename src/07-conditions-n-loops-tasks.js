@@ -413,9 +413,6 @@ function getCommonDirectoryPath(pathes) {
   return `${result.join('')}`;
 }
 
-console.log(getCommonDirectoryPath(['/web/images/image1.png', '/web/images/image2.png']));
-console.log(getCommonDirectoryPath(['/web/assets/style.css', '/web/scripts/app.js', 'home/setting.conf']));
-console.log(getCommonDirectoryPath(['/web/assets/style.css', '/.bin/mocha', '/read.me']));
 
 /**
  * Returns the product of two specified matrixes.
